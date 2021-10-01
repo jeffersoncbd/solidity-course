@@ -2,5 +2,6 @@
 .env
 
 #Hardhat files
-cache
-artifacts
+/cache
+/artifacts
+/typechain
