@@ -2,21 +2,19 @@ import hre from 'hardhat'
 import { bigNumberToInt } from '../tools/bigNumberToInt'
 
 async function main() {
-  const Greeter = await hre.ethers.getContractFactory('StorageNumber')
-  const greeter = await Greeter.deploy()
+  const StorageNumber = await hre.ethers.getContractFactory('StorageNumber')
+  const storageNumber = await StorageNumber.deploy()
 
-  await greeter.deployed()
+  await storageNumber.deployed()
 
-  const result = await greeter.set(50)
+  const result = await storageNumber.set(50)
   for(const value in result) {
     (result as unknown as any)[value] = bigNumberToInt((result as unknown as any)[value])
   }
   console.log('Set:', result)
   
-  const value = await greeter.get()
+  const value = await storageNumber.get()
   console.log('Get:', Number(value._hex))
-
-  console.log('StorageNumber deployed to:', greeter.address)
 }
 
 main()
